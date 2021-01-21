@@ -1,0 +1,274 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>web-automation</title>
+	<meta name="description" content="Documentation for web-automation">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="assets/css/main.css">
+	<script async src="assets/js/search.js" id="search-script"></script>
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="assets/js/search.json" data-base=".">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="index.html" class="title">web-automation</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<h1>web-automation</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<div class="tsd-panel tsd-typography">
+				<a href="#volvo-cars---save-a-million-more-lives-campaign-page-testing-automation" id="volvo-cars---save-a-million-more-lives-campaign-page-testing-automation" style="color: inherit; text-decoration: none;">
+					<h1>Volvo Cars - Save A Million More Lives Campaign Page Testing Automation</h1>
+				</a>
+				<p>We would try to automate testing of one of campaign page in Volvo Cars website using Selenium Webdriver.io, Cucumber &amp;Docker</p>
+				<a href="#features" id="features" style="color: inherit; text-decoration: none;">
+					<h2>Features</h2>
+				</a>
+				<ul>
+					<li>Dockerised solution</li>
+					<li>Parallel execution</li>
+					<li>Detailed reporting</li>
+					<li>Documentation</li>
+				</ul>
+				<a href="#requirements" id="requirements" style="color: inherit; text-decoration: none;">
+					<h2>Requirements</h2>
+				</a>
+				<ul>
+					<li><p>To run <em>Firefox</em> and <em>Chrome</em> browsers with docker selenium you need:</p>
+						<ul>
+							<li><code>docker</code></li>
+							<li><code>docker-compose</code></li>
+						</ul>
+					</li>
+					<li><p>Tests are executed with Node.js, requires:</p>
+						<ul>
+							<li><code>Node.js</code> version 10 or higher</li>
+							<li><code>npm</code> version 6 or higher</li>
+						</ul>
+					</li>
+				</ul>
+				<a href="#quick-start" id="quick-start" style="color: inherit; text-decoration: none;">
+					<h2>Quick start</h2>
+				</a>
+				<ol>
+					<li>Install dependencies required to run the tests:</li>
+				</ol>
+				<pre><code class="language-sh"><span style="color: #000000">npm install</span>
+</code></pre>
+				<ol start="2">
+					<li>Start docker selenium containers with <code>docker-compose</code>:</li>
+				</ol>
+				<pre><code class="language-sh"><span style="color: #008000"># starts the selenium hub and browser nodes in docker containers</span>
+<span style="color: #000000">npm run selenium</span>
+</code></pre>
+				<ol start="3">
+					<li>Run the tests and view the report:</li>
+				</ol>
+				<pre><code class="language-sh"><span style="color: #008000"># run tests and open the report</span>
+<span style="color: #000000">npm run </span><span style="color: #795E26">test</span>
+</code></pre>
+				<p>To stop all the docker containers from step 2:</p>
+				<pre><code class="language-sh"><span style="color: #000000">npm run selenium:stop</span>
+</code></pre>
+				<p>Note that selenium containers can be started once and then used across multiple sessions of running and debugging tests.</p>
+				<a href="#adding-tests" id="adding-tests" style="color: inherit; text-decoration: none;">
+					<h2>Adding tests</h2>
+				</a>
+				<p>Tests are written using <a href="https://cucumber.io/docs/gherkin/">Gherkin syntax</a> in a fashion that can be used as feature documentation:</p>
+				<pre><code class="language-gherkin"># This is a single line comment
+Feature: Performing a Google Search
+
+    As a user on the Google search page
+    I want to search for Selenium-Webdriver
+    Because I want to learn more about it
+
+    Background:
+        Given I open the url &quot;https://google.com&quot;
+
+    Scenario: Searching for Selenium Webdriver
+        When I set &quot;Selenium Webdriver&quot; to the inputfield &quot;[name=q]&quot;
+        And  I press &quot;Enter&quot;
+        Then I expect that element &quot;#search&quot; becomes displayed</code></pre>
+				<p>All tests should be located in <code>./src/features/*</code> directory with extension <code>.feature</code> (configured in <code>./config/tests.config.ts</code>).<br>For a list of predefined and supported steps see files:</p>
+				<ul>
+					<li><code>./src/steps/given.ts</code> </li>
+					<li><code>./src/steps/when.ts</code> </li>
+					<li><code>./src/steps/then.ts</code>.  </li>
+				</ul>
+				<a href="#browser-specific-tests" id="browser-specific-tests" style="color: inherit; text-decoration: none;">
+					<h3>Browser specific tests</h3>
+				</a>
+				<p>To run a test against a specific browser use predefined <a href="https://cucumber.io/docs/cucumber/api/#tags">tags</a>:</p>
+				<pre><code class="language-gherkin">Feature: Performing a Google Search
+
+    ...
+
+    # This scenario will run only in Chrome browser
+    @OnlyChrome
+    Scenario: Searching in chrome browser
+    ...
+
+    # This scenario will run only in Firefox browser
+    @OnlyFirefox
+    Scenario: Searching in Firefox browser
+    ...</code></pre>
+				<a href="#pending-tests" id="pending-tests" style="color: inherit; text-decoration: none;">
+					<h3>Pending tests</h3>
+				</a>
+				<p>To skip a test, use the <code>@Pending</code> tag:</p>
+				<pre><code class="language-gherkin">Feature: Performing a Google Search
+
+    ...
+
+    # This scenario will be skipped
+    @Pending
+    Scenario: Searching for WebdriverIO
+    ...</code></pre>
+				<a href="#verbose-tests" id="verbose-tests" style="color: inherit; text-decoration: none;">
+					<h3>Verbose tests</h3>
+				</a>
+				<p>Currently, a screenshot is attached only for a failing test. In case you want screenshots for a test regardless of its completion status,
+				use the <code>@Verbose</code> tag:</p>
+				<pre><code class="language-gherkin">Feature: Performing a Google Search
+
+    ...
+
+    # A screenshot and additional test details will be attached to the report
+    @Verbose
+    Scenario: Searching for WebdriverIO
+    ...</code></pre>
+				<a href="#hooks" id="hooks" style="color: inherit; text-decoration: none;">
+					<h3>Hooks</h3>
+				</a>
+				<p>Hooks are blocks of code that can run at various points in the Cucumber execution cycle. It is possible to write conditional hooks.<br>See examples of scenario hooks in <code>./src/steps/hooks.ts</code>. For a more advanced usage, configure hooks in
+				<code>./config/hooks.config.ts</code>.  </p>
+				<p>You can customize existing hooks or implement your own.
+				See the WebdriverIO <a href="(https://webdriver.io/docs/options.html#hooks)">documentation</a> about hooks. </p>
+				<a href="#configurations" id="configurations" style="color: inherit; text-decoration: none;">
+					<h2>Configurations</h2>
+				</a>
+				<a href="#environment-variables" id="environment-variables" style="color: inherit; text-decoration: none;">
+					<h3>Environment variables</h3>
+				</a>
+				<p>The configurable options are set in the <code>.env</code> file.</p>
+				<table>
+					<thead>
+						<tr>
+							<th>Variable</th>
+							<th>Usage</th>
+						</tr>
+					</thead>
+					<tbody><tr>
+							<td><code>SELENIUM_VERSION</code></td>
+							<td>Configure the version of selenium hub and nodes. Change this version if you want to run tests against a specific browser version. See the <a href="https://github.com/SeleniumHQ/docker-selenium/releases">list</a> of available selenium releases and browser versions.</td>
+						</tr>
+						<tr>
+							<td><code>SCREEN_WIDTH</code> <code>SCREEN_HEIGHT</code></td>
+							<td>Configure browser window size.</td>
+						</tr>
+				</tbody></table>
+				<a href="#webdriverio-options" id="webdriverio-options" style="color: inherit; text-decoration: none;">
+					<h3>WebdriverIO options</h3>
+				</a>
+				<p>WebdriverIO specific <a href="https://webdriver.io/docs/options.html">options</a> are all in <code>./config</code> directory.<br>For example, to configure a default url change the <code>baseUrl</code> option in <code>./config/index.ts</code>:  </p>
+				<pre><code class="language-typescript"><span style="color: #AF00DB">export</span><span style="color: #000000"> </span><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">config</span><span style="color: #000000"> = {</span>
+<span style="color: #000000">  </span><span style="color: #001080">runner:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;local&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">baseUrl:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;https://webdriver.io&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">  ...</span>
+</code></pre>
+			</div>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class=" ">
+						<a href="modules.html">Modules</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/action_clickelement.html">action/click<wbr>Element</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/action_openwebsite.html">action/open<wbr>Website</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/action_savescreenshot.html">action/save<wbr>Screen<wbr>Shot</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/action_waitfordisplayed.html">action/wait<wbr>For<wbr>Displayed</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/check_checkscreenshot.html">check/check<wbr>Screen<wbr>Shot</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/check_checktitle.html">check/check<wbr>Title</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/check_isdisplayed.html">check/is<wbr>Displayed</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="assets/js/main.js"></script>
+</body>
+</html>

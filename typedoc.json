@@ -1,0 +1,4 @@
+{
+    "entryPoints": ["./src/support/action", "./src/support/check"],
+    "out": "docs"
+}
