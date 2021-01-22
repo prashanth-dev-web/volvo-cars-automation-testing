@@ -27,24 +27,78 @@ We would try to automate testing of one of campaign page in Volvo Cars website u
 npm install
 ```
 
-2. Start docker selenium containers with `docker-compose`:
+2. Make sure you have minikube and kubectl installed. 
+Donot start minikube yet. If you had already started it, Makesure to restart minikube after the below configuration
+Configure Minikube memory and cpu as below
 
 ```sh
-# starts the selenium hub and browser nodes in docker containers
-npm run selenium
+# sets the mimikube local server to start with 5196MB and 4 cpus
+minikube config set memory 5196
+minikube config set cpus 4
 ```
 
-3. Run the tests and view the report:
+3. Start the mimkube server
+
+```sh
+minikube start
+```
+make sure minikube is up and running
+
+4. Create a deployment for selenium hub and its service, selenium chrome driver and selenium firefox driver
+
+```sh
+kubectl create -f deploy.yml
+kubectl create -f service.yml
+kubectl create -f chrome.yml
+kubectl create -f firefox.yml
+```
+
+This is a one time setup if you had already done it skip to step 8
+
+5. Determine the endpoint and nodeport by running the following command
+
+```sh
+kubectl describe service
+
+//Output
+Name:              kubernetes
+Namespace:         default
+...
+TargetPort:        8443/TCP 
+Endpoints:         192.168.64.7:8443 //So 192.168.64.7 is your endpoint 
+...
+NodePort:                 port0  32137/TCP //32137 is your port
+...
+
+```
+
+6. Update these values in config/server.config.ts
+
+```sh
+export const serverConfig = {
+  hostname: process.env.HUB_HOST || '192.168.64.7', // endpoint
+  port: parseInt(process.env.HUB_PORT, 10) || 32137, // port
+};
+```
+7. Navigate to selenium hub grid console to see if the hub recognises the browser drivers
+
+```sh
+http://192.168.64.7:32137/grid/console
+```
+
+You should see two chromium and one firefox driver.
+
+8. Run the tests and view the report:
 
 ```sh
 # run tests and open the report
 npm run test
 ```
 
-To stop all the docker containers from step 2:
+9. To stop the minikube
 
 ```sh
-npm run selenium:stop
+minikube stop
 ```
 
 Note that selenium containers can be started once and then used across multiple sessions of running and debugging tests.
